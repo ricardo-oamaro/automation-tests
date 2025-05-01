@@ -1,0 +1,58 @@
+{
+  "users": [
+    {
+      "name": "Maria ",
+      "email": "alice@example.com",
+      "id": "2"
+    },
+    {
+      "name": "Marcia",
+      "email": "alice@example.com",
+      "id": "3"
+    }
+  ],
+  "posts": [
+    {
+      "id": "1",
+      "title": "Primeiro Post",
+      "body": "Conteúdo do post",
+      "userId": 1
+    },
+    {
+      "id": "7738",
+      "title": "foo",
+      "body": "bar",
+      "userId": 1
+    },
+    {
+      "id": "37bc",
+      "title": "foo",
+      "body": "bar",
+      "userId": 1
+    },
+    {
+      "id": "4e65",
+      "title": "foo",
+      "body": "bar",
+      "userId": 1
+    },
+    {
+      "id": "94b0",
+      "title": "foo",
+      "body": "bar",
+      "userId": 1
+    },
+    {
+      "id": "fe95",
+      "title": "foo",
+      "body": "bar",
+      "userId": 1
+    },
+    {
+      "id": "e3f7",
+      "title": "foo",
+      "body": "bar",
+      "userId": 1
+    }
+  ]
+}
