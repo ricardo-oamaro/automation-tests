@@ -2,25 +2,50 @@ package br.com.test.api;
 
 import br.com.test.base.BaseApiTest;
 import br.com.test.utils.PayloadUtils;
-import io.qameta.allure.*;
-import io.qameta.allure.junit5.AllureJunit5;
-import io.restassured.RestAssured;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
-import static io.restassured.RestAssured.*;
-import static org.hamcrest.Matchers.*;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
-@ExtendWith(AllureJunit5.class)
-@Epic("Teste de exemplo")
-@Feature("Validação básica")
+import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.when;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.greaterThan;
+
 public class ApiTest extends BaseApiTest {
+
+    private static final String DB_PATH = "db.json";
+    private static final String BACKUP_DB_PATH = "db_backup.json";
+
+    @BeforeEach
+    public void backupDb() {
+        // Fazendo a cópia do db.json para o db-backup.json antes de cada teste
+        try {
+            Files.copy(Paths.get(DB_PATH), Paths.get(BACKUP_DB_PATH), StandardCopyOption.REPLACE_EXISTING);
+            System.out.println("Backup do db.json realizado antes do teste.");
+        } catch (IOException e) {
+            System.err.println("Erro ao realizar backup do db.json: " + e.getMessage());
+        }
+    }
+
+    @AfterEach
+    public void restoreDb() {
+        // Após cada teste, restaura o db.json com o db-backup.json
+        try {
+            Files.copy(Paths.get(BACKUP_DB_PATH), Paths.get(DB_PATH), StandardCopyOption.REPLACE_EXISTING);
+            System.out.println("db.json restaurado após o teste.");
+        } catch (IOException e) {
+            System.err.println("Erro ao restaurar o db.json: " + e.getMessage());
+        }
+    }
 
     @Test
     @DisplayName("Buscar usuários")
-    @Story("Execução simples")
-    @Severity(SeverityLevel.CRITICAL)
     public void testGetUsers() {
         given().
                 when().
