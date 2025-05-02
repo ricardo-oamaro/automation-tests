@@ -16,6 +16,8 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -32,6 +34,13 @@ public class LoginSteps {
         ChromeOptions options = new ChromeOptions();
         String headlessEnv = System.getenv("HEADLESS");
         boolean isHeadless = headlessEnv != null && headlessEnv.equalsIgnoreCase("true");
+
+        try {
+            String tempDir = Files.createTempDirectory("selenium-profile").toString();
+            options.addArguments("--user-data-dir=" + tempDir);
+        } catch (IOException e) {
+            throw new RuntimeException("Erro ao criar diretório temporário para user-data-dir", e);
+        }
 
         if (isHeadless) {
             options.addArguments("--headless=new");
