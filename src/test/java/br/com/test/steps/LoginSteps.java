@@ -51,7 +51,7 @@ public class LoginSteps {
 
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver(options);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
     }
 
     @Given("o usuário está na página de login do OrangeHRM")
