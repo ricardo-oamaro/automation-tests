@@ -18,7 +18,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18 # Escolha uma versão estável do Node.js
+          node-version: 18
 
       - name: Install dependencies
         run: npm install
@@ -26,7 +26,7 @@ jobs:
       - name: Start JSON Server
         run: |
           npm install -g json-server
-          nohup json-server --watch db.json --port 3000 > json-server.log 2>&1 &  # Executa em background e redireciona logs
+          nohup json-server --watch db.json --port 3000 > json-server.log 2>&1 &
 
       - name: Wait for server
         run: curl --retry 5 --retry-delay 2 --retry-connrefused http://localhost:3000
@@ -36,9 +36,10 @@ jobs:
         env:
           BASE_URL: http://localhost:3000
 
-
   selenium-tests:
+    name: Testes E2E com Selenium
     runs-on: ubuntu-latest
+    needs: test-api
 
     steps:
       - name: Checkout repository
@@ -56,5 +57,5 @@ jobs:
       - name: Verify Chrome version (opcional)
         run: google-chrome --version
 
-      - name: Run Maven tests
+      - name: Run Selenium E2E Tests
         run: mvn verify -P e2e-tests
