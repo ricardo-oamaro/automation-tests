@@ -16,7 +16,8 @@ jobs:
         image: node:16
         ports:
           - 3000:3000
-        options: --entrypoint "sh -c 'npm install -g json-server && json-server --watch /data/db.json --port 3000'"
+        options: --entrypoint sh
+        command: -c "npm install -g json-server && json-server --watch /data/db.json --port 3000"
 
     steps:
       - name: Checkout do código
