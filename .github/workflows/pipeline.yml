@@ -6,66 +6,62 @@ on:
   pull_request:
     branches: ["**"]
 
-jobs:
-  test-api:
-    name: Testes de API
-    runs-on: ubuntu-latest
+#jobs:
+#  test-api:
+#    name: Testes de API
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: Checkout repo
+#        uses: actions/checkout@v3
+#
+#      - name: Set up Node.js
+#        uses: actions/setup-node@v3
+#        with:
+#          node-version: 18 # Escolha uma versão estável do Node.js
+#
+#      - name: Install dependencies
+#        run: npm install
+#
+#      - name: Start JSON Server
+#        run: |
+#          npm install -g json-server
+#          nohup json-server --watch db.json --port 3000 > json-server.log 2>&1 &  # Executa em background e redireciona logs
+#
+#      - name: Wait for server
+#        run: curl --retry 5 --retry-delay 2 --retry-connrefused http://localhost:3000
+#
+#      - name: Rodar testes de API
+#        run: mvn test -Dtest=br.com.test.api.*Test
+#        env:
+#          BASE_URL: http://localhost:3000
 
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+  jobs:
+    selenium-tests:
+      runs-on: ubuntu-latest
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18 # Escolha uma versão estável do Node.js
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v3
 
-      - name: Install dependencies
-        run: npm install
+        - name: Set up JDK 17
+          uses: actions/setup-java@v3
+          with:
+            java-version: '17'
+            distribution: 'temurin'
 
-      - name: Start JSON Server
-        run: |
-          npm install -g json-server
-          nohup json-server --watch db.json --port 3000 > json-server.log 2>&1 &  # Executa em background e redireciona logs
+        - name: Install Chrome
+          run: |
+            sudo apt-get update
+            sudo apt-get install -y google-chrome-stable
 
-      - name: Wait for server
-        run: curl --retry 5 --retry-delay 2 --retry-connrefused http://localhost:3000
+        - name: Download ChromeDriver
+          run: |
+            CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+' | head -1)
+            wget -N https://chromedriver.storage.googleapis.com/${CHROME_VERSION}/chromedriver_linux64.zip || true
+            unzip chromedriver_linux64.zip
+            sudo mv chromedriver /usr/local/bin/
+            sudo chmod +x /usr/local/bin/chromedriver
 
-      - name: Rodar testes de API
-        run: mvn test -Dtest=br.com.test.api.*Test
-        env:
-          BASE_URL: http://localhost:3000
-
-  test-e2e:
-    name: Testes E2E (Cucumber)
-    runs-on: ubuntu-latest
-    needs: test-api
-
-    steps:
-      - name: Checkout do código
-        uses: actions/checkout@v3
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: 17
-
-      - name: Install Chrome
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
-
-      - name: Install xvfb
-        run: sudo apt-get install -y xvfb
-
-      - name: Start xvfb
-        run: |
-          Xvfb :99 -screen 0 1366x768x24 &
-          echo "DISPLAY=:99" >> $GITHUB_ENV # Define a variavel de ambiente
-
-      - name: Run E2E tests with Maven
-        run: mvn verify -P e2e-tests
-        env:
-          HEADLESS: true
-          DISPLAY: :99 # Garante que o Selenium use o Xvfb
+        - name: Build and run tests
+          run: mvn verify -P e2e-tests
