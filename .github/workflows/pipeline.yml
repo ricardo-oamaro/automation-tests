@@ -13,30 +13,23 @@ jobs:
 
     steps:
       - name: Checkout repo
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
 
       - name: Install dependencies
-      - run: npm install
+        run: npm install
 
       - name: Start JSON Server
-      - run: |
-      - npm install -g json-server
-      - json-server --watch db.json --port 3000 &
+        run: |
+          npm install -g json-server
+          json-server --watch db.json --port 3000 &
 
       - name: Wait for server
-      - run: curl --retry 5 --retry-delay 2 --retry-connrefused http://localhost:3000
-
-      - name: Run your tests
-      - run: npm test
-
-      - name: Checkout do código
-        uses: actions/checkout@v3
+        run: curl --retry 5 --retry-delay 2 --retry-connrefused http://localhost:3000
 
       - name: Rodar testes de API
         run: mvn test -Dtest=br.com.test.api.*Test
         env:
           BASE_URL: http://localhost:3000
-    uses:
 
   test-e2e:
     name: Testes E2E (Cucumber)
