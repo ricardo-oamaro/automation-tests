@@ -6,6 +6,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.jupiter.api.AfterEach;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -116,7 +117,7 @@ public class LoginSteps {
         assertEquals(secaoEsperada, titulo.getText());
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         if (driver != null) driver.quit();
     }
