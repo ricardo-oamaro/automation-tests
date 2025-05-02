@@ -57,4 +57,4 @@ jobs:
         run: google-chrome --version
 
       - name: Run Maven tests
-        run: mvn clean test
+        run: mvn verify -P e2e-tests
