@@ -32,21 +32,15 @@ public class LoginSteps {
     public void setup() {
 
         ChromeOptions options = new ChromeOptions();
-        String headlessEnv = System.getenv("HEADLESS");
-        boolean isHeadless = headlessEnv != null && headlessEnv.equalsIgnoreCase("true");
 
-        try {
-            String tempDir = Files.createTempDirectory("selenium-profile").toString();
-            options.addArguments("--user-data-dir=" + tempDir);
-        } catch (IOException e) {
-            throw new RuntimeException("Erro ao criar diretório temporário para user-data-dir", e);
-        }
+        String tempUserDataDir = System.getProperty("java.io.tmpdir") + "/chrome-profile-" + System.currentTimeMillis();
+        options.addArguments("--user-data-dir=" + tempUserDataDir);
 
-        if (isHeadless) {
-            options.addArguments("--headless=new");
-            options.addArguments("--no-sandbox");
-            options.addArguments("--disable-dev-shm-usage");
-        }
+        options.addArguments("--headless=new");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--disable-gpu");
+        options.addArguments("--window-size=1920,1080");
 
 
         WebDriverManager.chromedriver().setup();
