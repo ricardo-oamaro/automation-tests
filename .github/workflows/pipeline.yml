@@ -11,15 +11,24 @@ jobs:
     name: Testes de API
     runs-on: ubuntu-latest
 
-    services:
-      api:
-        image: node:16
-        ports:
-          - 3000:3000
-        options: --entrypoint sh
-        command: -c "npm install -g json-server && json-server --watch /data/db.json --port 3000"
-
     steps:
+      - name: Checkout repo
+      - uses: actions/checkout@v3
+
+      - name: Install dependencies
+      - run: npm install
+
+      - name: Start JSON Server
+      - run: |
+      - npm install -g json-server
+      - json-server --watch db.json --port 3000 &
+
+      - name: Wait for server
+      - run: curl --retry 5 --retry-delay 2 --retry-connrefused http://localhost:3000
+
+      - name: Run your tests
+      - run: npm test
+
       - name: Checkout do código
         uses: actions/checkout@v3
 
@@ -27,6 +36,7 @@ jobs:
         run: mvn test -Dtest=br.com.test.api.*Test
         env:
           BASE_URL: http://localhost:3000
+    uses:
 
   test-e2e:
     name: Testes E2E (Cucumber)
