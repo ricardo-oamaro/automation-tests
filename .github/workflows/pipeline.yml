@@ -52,6 +52,6 @@ jobs:
           sudo apt-get install -y google-chrome-stable
 
       - name: Rodar testes E2E com Maven
-        run: mvn test -Dtest=br.com.test.runners.TestRunnerTest
+        run: mvn verify
         env:
           HEADLESS: true

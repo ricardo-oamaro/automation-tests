@@ -1,4 +1,4 @@
-package steps;
+package br.com.test.steps;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
