@@ -95,7 +95,7 @@ public class EcommerceSteps {
 
     @When("inicia o checkout")
     public void iniciarCheckout() {
-        WebElement checkout = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("checkout")));
+        WebElement checkout = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(),'Checkout')]")));
         checkout.click();
     }
 

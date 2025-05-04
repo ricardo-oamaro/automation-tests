@@ -12,7 +12,7 @@ Feature: Adicionar e remover itens do carrinho no SauceDemo
     Examples:
       | produto               |
       | Sauce Labs Backpack   |
-      | Sauce Labs Bike Light |
+      | Sauce Labs Onesie |
 
   @checkout
   Scenario: Finalizar uma compra com sucesso
