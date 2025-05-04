@@ -30,6 +30,7 @@ public class EcommerceSteps {
         String tempUserDataDir = System.getProperty("java.io.tmpdir") + "/chrome-profile-" + System.currentTimeMillis();
         options.addArguments("--user-data-dir=" + tempUserDataDir);
 
+        options.addArguments("--incognito");
         options.addArguments("--headless=new");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
@@ -90,13 +91,14 @@ public class EcommerceSteps {
 
     @When("vai para o carrinho")
     public void acessarCarrinho() {
-        driver.findElement(By.className("shopping_cart_link")).click();
+        driver.findElement(By.id("shopping_cart_container")).click();
+        System.out.println("Acessando o carrinho");
     }
 
     @When("inicia o checkout")
     public void iniciarCheckout() {
-        WebElement checkout = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"checkout\"]")));
-        checkout.click();
+        System.out.println(" pagina do checkout");
+        driver.findElement(By.id("checkout")).click();
     }
 
     @When("preenche os dados de pagamento com nome {string}, sobrenome {string} e CEP {string}")
