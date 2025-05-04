@@ -12,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -61,7 +62,7 @@ public class EcommerceSteps {
 
     @When("adiciona o produto {string} ao carrinho")
     public void adicionarProdutoAoCarrinho(String nomeProduto) throws InterruptedException {
-        WebElement botaoAdicionar = driver.findElement(By.xpath("//div[text()='" + nomeProduto + "']/ancestor::div[@class='inventory_item']//button"));
+        WebElement botaoAdicionar = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[text()='" + nomeProduto + "']/ancestor::div[@class='inventory_item']//button")));
         botaoAdicionar.click();
     }
 
@@ -77,7 +78,7 @@ public class EcommerceSteps {
         if (!driver.getCurrentUrl().contains("cart")) {
             driver.findElement(By.className("shopping_cart_link")).click();
         }
-        WebElement botaoRemover = driver.findElement(By.xpath("//div[text()='" + nomeProduto + "']/ancestor::div[@class='cart_item']//button"));
+        WebElement botaoRemover = wait.until(ExpectedConditions.visibilityOfElementLocated((By.xpath("//div[text()='" + nomeProduto + "']/ancestor::div[@class='cart_item']//button"))));
         botaoRemover.click();
     }
 
@@ -94,7 +95,8 @@ public class EcommerceSteps {
 
     @When("inicia o checkout")
     public void iniciarCheckout() {
-        driver.findElement(By.id("checkout")).click();
+        WebElement checkout = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("checkout")));
+        checkout.click();
     }
 
     @When("preenche os dados de pagamento com nome {string}, sobrenome {string} e CEP {string}")
