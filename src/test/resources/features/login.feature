@@ -1,20 +1,17 @@
 Feature: Login no OrangeHRM
 
-  @Skip
   Scenario: Usuário acessa o sistema com credenciais válidas
     Given o usuário está na página de login do OrangeHRM
     When ele informa usuário "Admin" e senha "admin123"
     And clica no botão de login
     Then ele deve ver o painel de controle
 
-  @Skip
   Scenario: Usuário acessa o sistema com credenciais inválidas
     Given o usuário está na página de login do OrangeHRM
     When ele informa usuário "usuarioInvalido" e senha "senhaIncorreta"
     And clica no botão de login
     Then ele deve ver uma mensagem de erro
 
-  @Skip
   Scenario: Usuário faz logout após login
     Given o usuário está na página de login do OrangeHRM
     When ele informa usuário "Admin" e senha "admin123"
