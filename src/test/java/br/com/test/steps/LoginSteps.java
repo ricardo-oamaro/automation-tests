@@ -6,18 +6,14 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.AfterEach;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -46,6 +42,11 @@ public class LoginSteps {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver(options);
         wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+    }
+
+    @After
+    public void tearDown() {
+        if (driver != null) driver.quit();
     }
 
     @Given("o usuário está na página de login do OrangeHRM")
@@ -118,10 +119,5 @@ public class LoginSteps {
                 By.xpath("//h5[text()='" + secaoEsperada + "']")
         ));
         assertEquals(secaoEsperada, titulo.getText());
-    }
-
-    @AfterEach
-    public void tearDown() {
-        if (driver != null) driver.quit();
     }
 }
