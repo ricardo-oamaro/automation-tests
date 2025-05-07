@@ -49,8 +49,8 @@ test/
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/seu-repositorio.git
-cd seu-repositorio
+git clone https://github.com/ricardo-oamaro/automation-tests.git
+### caso nao consiga clonar, faça o download do zip ou solicite acesso ao repositorio
 ```
 
 ### 2. Instale as dependências Node.js
