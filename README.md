@@ -114,7 +114,3 @@ export BASE_URL=http://localhost:3000
 ```
 
 ---
-
-## Licença
-
-Este projeto é de uso interno/demonstrativo. Adicione sua licença aqui, se necessário.
