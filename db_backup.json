@@ -1,11 +1,6 @@
 {
   "users": [
     {
-      "name": "Marta ",
-      "email": "alice@example.com",
-      "id": "1"
-    },
-    {
       "name": "Maria ",
       "email": "alice@example.com",
       "id": "2"
@@ -103,6 +98,18 @@
     },
     {
       "id": "e390",
+      "title": "foo",
+      "body": "bar",
+      "userId": 1
+    },
+    {
+      "id": "cfe9",
+      "title": "foo",
+      "body": "bar",
+      "userId": 1
+    },
+    {
+      "id": "1a55",
       "title": "foo",
       "body": "bar",
       "userId": 1

@@ -2,10 +2,12 @@ package br.com.test.api;
 
 import br.com.test.base.BaseApiTest;
 import br.com.test.utils.PayloadUtils;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import io.cucumber.java.After;
+import io.qameta.allure.*;
+import io.qameta.allure.junit4.AllureJunit4;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -22,7 +24,7 @@ public class ApiTest extends BaseApiTest {
     private static final String DB_PATH = "db.json";
     private static final String BACKUP_DB_PATH = "db_backup.json";
 
-    @BeforeEach
+    @Before
     public void backupDb() {
         // Fazendo a cópia do db.json para o db-backup.json antes de cada teste
         try {
@@ -33,7 +35,7 @@ public class ApiTest extends BaseApiTest {
         }
     }
 
-    @AfterEach
+    @After
     public void restoreDb() {
         // Após cada teste, restaura o db.json com o db-backup.json
         try {
@@ -44,8 +46,11 @@ public class ApiTest extends BaseApiTest {
         }
     }
 
+    @Epic("User Management")
+    @Feature("Get Users")
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Teste para validar a recuperação de usuários")
     @Test
-    @DisplayName("Buscar usuários")
     public void testGetUsers() {
         given().
                 when().
@@ -55,8 +60,11 @@ public class ApiTest extends BaseApiTest {
                 body("size()", greaterThan(0));
     }
 
+    @Epic("Post Management")
+    @Feature("Create Posts")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Teste para validar a criação de posts")
     @Test
-    @DisplayName("criar um post")
     public void testCreatePost() {
         String payload = PayloadUtils.createPostPayload("foo", "bar", 1);
 
@@ -71,8 +79,11 @@ public class ApiTest extends BaseApiTest {
                 body("userId", equalTo(1));
     }
 
+    @Epic("User Management")
+    @Feature("Update Users")
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Teste para validar a atualização de usuários")
     @Test
-    @DisplayName("Atualizar usuário existente")
     public void testUpdateUser() {
         String updatedUser = """
             {
@@ -92,8 +103,11 @@ public class ApiTest extends BaseApiTest {
                 body("email", equalTo("alice.new@example.com"));
     }
 
+    @Epic("User Management")
+    @Feature("Delete Users")
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Teste para validar a exclusão de usuários")
     @Test
-    @DisplayName("deletar usuário existente")
     public void testDeleteUser() {
         when().
                 delete("/users/1").
