@@ -1,0 +1,40 @@
+{
+  "users": [
+    {
+      "name": "Alice Atualizada",
+      "email": "alice.new@example.com",
+      "id": "1"
+    },
+    {
+      "name": "Maria ",
+      "email": "alice@example.com",
+      "id": "2"
+    },
+    {
+      "name": "Marcia",
+      "email": "alice@example.com",
+      "id": "3"
+    }
+  ],
+  "user-empty": [],
+  "posts": [
+    {
+      "id": "1",
+      "title": "Primeiro Post",
+      "body": "Conteúdo do post",
+      "userId": 1
+    },
+    {
+      "id": "d5f7",
+      "title": "foo",
+      "body": "bar",
+      "userId": 1
+    },
+    {
+      "id": "6a31",
+      "title": "foo",
+      "body": "bar",
+      "userId": 1
+    }
+  ]
+}
