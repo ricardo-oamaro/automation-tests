@@ -1,6 +1,11 @@
 {
   "users": [
     {
+      "name": "Alice Atualizada",
+      "email": "alice.new@example.com",
+      "id": "1"
+    },
+    {
       "name": "Maria ",
       "email": "alice@example.com",
       "id": "2"
@@ -27,12 +32,6 @@
     },
     {
       "id": "6a31",
-      "title": "foo",
-      "body": "bar",
-      "userId": 1
-    },
-    {
-      "id": "d858",
       "title": "foo",
       "body": "bar",
       "userId": 1
