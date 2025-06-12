@@ -33,7 +33,6 @@ jobs:
 
       - name: Start JSON Server
         run: |
-          cp db-${{ matrix.env }}.json db.json
           nohup json-server --watch db.json --port 3000 > json-server.log 2>&1 &
           sleep 5
 
