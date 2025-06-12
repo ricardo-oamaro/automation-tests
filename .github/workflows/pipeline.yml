@@ -6,11 +6,8 @@ on:
 
 jobs:
   test:
-    name: Testes no ambiente ${{ matrix.env }}
+    name: Testes no ambiente
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        env: [dev, uat]
 
     steps:
       - name: Checkout repository
