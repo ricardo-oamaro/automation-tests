@@ -1,11 +1,12 @@
 package br.com.test.steps.api;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.java.it.Quando;
 import io.restassured.response.Response;
 
+import static br.com.test.utils.ApiConstants.BASE_URI;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -27,6 +28,7 @@ public class UpdateUserSteps {
     @When("o cliente faz uma requisição PUT para {string}")
     public void oClienteFazUmaRequisicaoPut(String endpoint) {
         response = given()
+                .baseUri(BASE_URI)
                 .header("Content-Type", "application/json")
                 .body(payload)
                 .put(endpoint);
@@ -37,12 +39,12 @@ public class UpdateUserSteps {
         response.then().body("name", equalTo(nomeEsperado));
     }
 
-    @Then("o email da resposta deve ser {string}")
+    @And("o email da resposta deve ser {string}")
     public void validarEmailResposta(String emailEsperado) {
         response.then().body("email", equalTo(emailEsperado));
     }
 
-    @Then("o status da resposta deve ser {int}")
+    @And("o status da resposta deve ser {int}")
     public void validarStatusCode(int status) {
         response.then().statusCode(status);
     }

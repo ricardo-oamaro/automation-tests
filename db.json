@@ -1,11 +1,6 @@
 {
   "users": [
     {
-      "name": "Marta ",
-      "email": "alice@example.com",
-      "id": "1"
-    },
-    {
       "name": "Maria ",
       "email": "alice@example.com",
       "id": "2"
@@ -16,6 +11,7 @@
       "id": "3"
     }
   ],
+  "user-empty": [],
   "posts": [
     {
       "id": "1",
@@ -24,85 +20,19 @@
       "userId": 1
     },
     {
-      "id": "7738",
+      "id": "d5f7",
       "title": "foo",
       "body": "bar",
       "userId": 1
     },
     {
-      "id": "37bc",
+      "id": "6a31",
       "title": "foo",
       "body": "bar",
       "userId": 1
     },
     {
-      "id": "4e65",
-      "title": "foo",
-      "body": "bar",
-      "userId": 1
-    },
-    {
-      "id": "94b0",
-      "title": "foo",
-      "body": "bar",
-      "userId": 1
-    },
-    {
-      "id": "fe95",
-      "title": "foo",
-      "body": "bar",
-      "userId": 1
-    },
-    {
-      "id": "e3f7",
-      "title": "foo",
-      "body": "bar",
-      "userId": 1
-    },
-    {
-      "id": "0f42",
-      "title": "foo",
-      "body": "bar",
-      "userId": 1
-    },
-    {
-      "id": "6355",
-      "title": "foo",
-      "body": "bar",
-      "userId": 1
-    },
-    {
-      "id": "5aee",
-      "title": "foo",
-      "body": "bar",
-      "userId": 1
-    },
-    {
-      "id": "9d97",
-      "title": "foo",
-      "body": "bar",
-      "userId": 1
-    },
-    {
-      "id": "8478",
-      "title": "foo",
-      "body": "bar",
-      "userId": 1
-    },
-    {
-      "id": "b90d",
-      "title": "foo",
-      "body": "bar",
-      "userId": 1
-    },
-    {
-      "id": "9628",
-      "title": "foo",
-      "body": "bar",
-      "userId": 1
-    },
-    {
-      "id": "e390",
+      "id": "d858",
       "title": "foo",
       "body": "bar",
       "userId": 1

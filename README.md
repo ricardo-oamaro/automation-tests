@@ -67,21 +67,19 @@ npx json-server --watch db.json --port 3000
 
 ---
 
-## Rodar Testes de API
+## Rodar Testes de API e E2E
 
 ```bash
-mvn test -Dtest=br.com.test.api.*Test
+mvn clean test
 ```
-
 ---
 
-## Rodar Testes E2E (Selenium)
+## Rodar Allure Reports
+Para gerar relatórios Allure, execute:
 
 ```bash
-mvn verify -P e2e-tests
+allure serve target/allure-results
 ```
-
----
 
 ## Rodar Testes de Carga (JMeter)
 

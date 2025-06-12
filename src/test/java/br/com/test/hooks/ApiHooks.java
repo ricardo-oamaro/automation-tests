@@ -1,9 +1,7 @@
 package br.com.test.hooks;
 
+import io.cucumber.java.Before;
 import io.cucumber.java.After;
-import io.cucumber.java.AfterAll;
-import io.cucumber.java.BeforeAll;
-import org.junit.Before;
 
 import java.io.IOException;
 import java.nio.file.Files;

@@ -6,6 +6,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 
+import static br.com.test.utils.ApiConstants.BASE_URI;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -19,12 +20,23 @@ public class CreatePostSteps {
         payload = PayloadUtils.createPostPayload(titulo, corpo, userId);
     }
 
+    @Given("um payload malformado")
+    public void criarPayloadMalformado() {
+        payload = "{ \"title\": \"foo\", \"body\": ";
+    }
+
     @When("o cliente faz uma requisição POST para {string}")
     public void enviarRequisicaoPost(String endpoint) {
         response = given()
+                .baseUri(BASE_URI)
                 .header("Content-Type", "application/json")
                 .body(payload)
                 .post(endpoint);
+    }
+
+    @Then("o status code deve ser {int}")
+    public void validarStatusCodeCriacaoPost(int status) {
+        response.then().statusCode(status);
     }
 
     @Then("o título da resposta deve ser {string}")
